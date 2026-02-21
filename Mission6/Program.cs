@@ -1,18 +1,21 @@
+using Microsoft.EntityFrameworkCore;
 using Mission6.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add MVC controllers and views
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<MovieRepository>();
+
+// Register the EF Core DbContext with SQLite, using the connection string from appsettings.json
+builder.Services.AddDbContext<MovieDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("MovieConnection")));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

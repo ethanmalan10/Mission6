@@ -28,6 +28,9 @@
         <dt class="col-sm-3">Edited</dt>
         <dd class="col-sm-9">@(Model.Edited ? "Yes" : "No")</dd>
 
+        <dt class="col-sm-3">Copied to Plex</dt>
+        <dd class="col-sm-9">@(Model.CopiedToPlex ? "Yes" : "No")</dd>
+
         @if (!string.IsNullOrEmpty(Model.LentTo))
         {
             <dt class="col-sm-3">Lent To</dt>
